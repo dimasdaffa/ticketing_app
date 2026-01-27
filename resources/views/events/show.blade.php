@@ -16,8 +16,8 @@
                 <div class="card bg-base-100 shadow">
                     <figure>
                         @php
-                            $hasImage = $event->gambar && Storage::disk('public')->exists($event->gambar);
-                            $imageSrc = $hasImage ? asset('storage/' . $event->gambar) : 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp';
+                            $hasImage = $event->gambar && file_exists(public_path('images/events/' . $event->gambar));
+                            $imageSrc = $hasImage ? asset('images/events/' . $event->gambar) : 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp';
                             $fallbackSrc = 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp';
                         @endphp
                         <img src="{{ $imageSrc }}" onerror="this.onerror=null; this.src='{{ $fallbackSrc }}';"
@@ -30,7 +30,7 @@
                                 <p class="text-sm text-gray-500 mt-1">
                                     {{ \Carbon\Carbon::parse($event->tanggal_waktu)->locale('id')->translatedFormat('d F Y, H:i') }}
                                     • 📍
-                                    {{ $event->lokasi }}
+                                    {{ $event->location->lokasi ?? '-' }}
                                 </p>
 
                                 <div class="mt-3 flex gap-2 items-center">

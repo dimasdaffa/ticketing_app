@@ -8,12 +8,12 @@
         ? \Carbon\Carbon::parse($date)->locale('id')->translatedFormat('d F Y, H:i')
         : 'Tanggal tidak tersedia';
 
-    // Safe image URL: use external URL if provided, otherwise use storage path
+    // Safe image URL: use external URL if provided, otherwise use public path
     $fallbackImg = 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp';
     $imageUrl = $image
         ? (filter_var($image, FILTER_VALIDATE_URL)
             ? $image
-            : asset('storage/' . $image))
+            : asset('images/events/' . $image))
         : $fallbackImg;
 
 @endphp
